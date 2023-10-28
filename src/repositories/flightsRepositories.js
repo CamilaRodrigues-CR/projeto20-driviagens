@@ -14,6 +14,6 @@ async function insertFlights(origin, destination, date){
 async function findFlights( origin, destination, date){
     const resultPassenger = db.query(`SELECT * FROM flights WHERE "origin"=$1 AND "destination"=$2 AND "date"=$3;` , [origin, destination, date])
     return resultPassenger;
- }
+}
 
 export const flightsRepositories = {findCities, insertFlights, findFlights}
