@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
-import { errors } from "../errors/validatesErrors.js";
 import { citiesServices } from "../services/citiesServices.js";
 import { citiesRepositories } from "../repositories/citiesRepositories.js";
+import { errors } from "../errors/typeErrors.js";
 
 
 export async function postcities(req, res){
