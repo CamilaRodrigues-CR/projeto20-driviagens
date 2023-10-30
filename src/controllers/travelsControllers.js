@@ -15,6 +15,6 @@ const existIds = await travelsServices.existPassenger(passengerId, flightId)
     await travelsRepositories.insertTravel(passengerId, flightId);
 
     const travel = await travelsRepositories.findTravels(passengerId, flightId);
-    console.log(travel.rows[0])
+
     return res.status(httpStatus.CREATED).send(travel.rows[0]);
 };

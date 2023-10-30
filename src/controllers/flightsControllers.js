@@ -38,3 +38,30 @@ export async function postFlights(req, res) {
 
     return res.status(httpStatus.CREATED).send(formatedFlight);
 };
+
+export async function getFlights(req, res) {
+    const { origin, destination } = req.query
+
+    const resultFlights = await flightsRepositories.getFlights(origin, destination)
+
+    const flights = resultFlights.rows.map(f => {
+        const obj = {
+            ...f,
+            date: f.date.toISOString().slice(0, 10).split('-').reverse().join('-')
+        }
+        return obj;
+    })
+
+    res.status(httpStatus.OK).send(flights)
+}
+
+/*
+
+O resultado sempre deve vir ordenado por datas, da mais próxima para a mais distante.
+
+query para a busca (USAR ALIASES PARA CONSEGUIR REPETIR A BUSCA PELO NOME DA CIDADE) :
+para buscar a origem => cities_origin.name <= fará com que a coluna cities.name tenha esse nome temporáriamente para a consulta
+para buscar o destino  => cities_destination.name <= 
+
+buscar SQL LIKE operator para entender
+*/
