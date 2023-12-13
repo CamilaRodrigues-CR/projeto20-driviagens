@@ -1,8 +1,11 @@
 import httpStatus from "http-status";
 import { errors } from "../errors/typeErrors.js";
-import { flightsRepositories } from "../repositories/flightsRepositories.js";
 import { flightsServices } from "../services/flightsServices.js";
+import dayjs from "dayjs";
 
+
+
+// *******   ARRUMAR A INSERÇÃO E O GET NO DEPLOY  ********
 
 export async function postFlights(req, res) {
     const { origin, destination, date } = req.body;
@@ -19,11 +22,9 @@ export async function postFlights(req, res) {
     const datesEquals = await flightsServices.futureDate(date);
     if (datesEquals == true) throw errors.datesEqualsError("data inserida")
 
-    //inserir o voo
-    await flightsRepositories.insertFlights(origin, destination, date);
+    await flightsServices.insertFlights(origin, destination, date);
 
-    //buscar o retorno
-    const flight = await flightsRepositories.findFlights(origin, destination, date)
+    const flight = await flightsServices.findFlights(origin, destination, date)
 
     //formatar a data
     const data = flight.rows[0].date.toISOString().slice(0, 10)
@@ -37,12 +38,14 @@ export async function postFlights(req, res) {
     };
 
     return res.status(httpStatus.CREATED).send(formatedFlight);
+
 };
 
 export async function getFlights(req, res) {
     const { origin, destination } = req.query
 
-    const resultFlights = await flightsRepositories.getFlights(origin, destination)
+    // TO DO: passar o acesso ao repository para a service
+    const resultFlights = await flightsServices.getFlights(origin, destination)
 
     const flights = resultFlights.rows.map(f => {
         const obj = {

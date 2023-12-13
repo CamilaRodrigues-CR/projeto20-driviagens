@@ -12,8 +12,11 @@ const existIds = await travelsServices.existPassenger(passengerId, flightId)
     if(existIds === null) throw errors.notFoundError("O id do passageiro ou o id do vôo é inexistente")
   
 //inserir os dados na tabela
-    await travelsRepositories.insertTravel(passengerId, flightId);
 
+    // TO DO: passar o acesso ao repository para a service
+    await travelsRepositories.insertTravel(passengerId, flightId);
+    
+    // TO DO: passar o acesso ao repository para a service
     const travel = await travelsRepositories.findTravels(passengerId, flightId);
 
     return res.status(httpStatus.CREATED).send(travel.rows[0]);

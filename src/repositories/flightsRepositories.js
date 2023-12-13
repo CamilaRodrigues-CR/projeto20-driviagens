@@ -1,14 +1,11 @@
 import { db } from "../database/databaseConnection.js";
 
 //post flights
-async function findCities(id) {
-    const resultCity = db.query(`SELECT * FROM cities WHERE id=$1;`, [id]);
-    return resultCity;
-}
 
 async function insertFlights(origin, destination, date) {
 
-    const resultInsert = db.query(`INSERT INTO flights ("origin" , "destination", "date") VALUES ($1, $2, $3);`, [origin, destination, date]);
+    console.log("repository da flights",origin, destination, date)
+    const resultInsert = db.query(`INSERT INTO flights (origin , destination, date) VALUES ($1, $2, $3);`, [origin, destination, date]);
     return resultInsert;
 }
 
@@ -45,4 +42,8 @@ async function getFlights(origin, destination) {
     return result;
 }
 
-export const flightsRepositories = { findCities, insertFlights, findFlights, getFlights }
+export const flightsRepositories = {
+    insertFlights, 
+    findFlights, 
+    getFlights 
+}
