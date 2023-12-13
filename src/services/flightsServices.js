@@ -29,7 +29,7 @@ async function insertFlights(origin, destination, date){
    const reverse = formatData.reverse()
    const toISOdata = reverse.join('-')
 
-   const isoDate = dayjs(toISOdata).format('YYYY-MM-DD')
+   const isoDate = dayjs(toISOdata).toISOString()
    console.log('data =>' ,isoDate)
 
     const result = await flightsRepositories.insertFlights(origin, destination, isoDate);

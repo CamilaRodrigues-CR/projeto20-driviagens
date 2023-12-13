@@ -15,6 +15,7 @@ export async function getPassengersTravels(req, res) {
     // TO DO: retornar o nome completo do passageiro
     const { name } = req.query
     const getPassengersTravels = await passengersService.findPassagersTravels(name)
+    
 
     return res.status(httpStatus.OK).send(getPassengersTravels.rows)
 }
