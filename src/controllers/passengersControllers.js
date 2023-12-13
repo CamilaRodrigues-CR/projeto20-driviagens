@@ -12,10 +12,13 @@ export async function postPassenger(req, res) {
 };
 
 export async function getPassengersTravels(req, res) {
-    // TO DO: retornar o nome completo do passageiro
     const { name } = req.query
     const getPassengersTravels = await passengersService.findPassagersTravels(name)
     
+    const arrayFormatado = getPassengersTravels.rows.map(obj => ({
+        passenger: `${obj.firstName} ${obj.lastName}`,
+        travels: obj.travels
+      }));
 
-    return res.status(httpStatus.OK).send(getPassengersTravels.rows)
+    return res.status(httpStatus.OK).send(arrayFormatado)
 }
