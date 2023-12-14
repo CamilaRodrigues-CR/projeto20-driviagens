@@ -12,6 +12,6 @@ export async function postcities(req, res) {
     await citiesServices.insertCity(name)
 
     const city = await citiesServices.findCity(name);
-
+    console.log(city)
     return res.status(httpStatus.CREATED).send(city.rows[0])
 };

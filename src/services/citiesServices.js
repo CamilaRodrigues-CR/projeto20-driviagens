@@ -1,7 +1,7 @@
 import { citiesRepositories } from "../repositories/citiesRepositories.js"
 
 async function existCity(name) {
-    const city = await citiesRepositories.findCity(name);
+    const city = await citiesRepositories.findCityByName(name);
     if (city.rowCount === 0) return null
 }
 
