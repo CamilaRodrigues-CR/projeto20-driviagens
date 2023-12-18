@@ -25,7 +25,7 @@ export async function postFlights(req, res) {
     await flightsServices.insertFlights(origin, destination, date);
 
     const flight = await flightsServices.findFlights(origin, destination, date)
-
+    
     //formatar a data
     const data = flight.rows[0].date.toISOString().slice(0, 10)
     const arrData = data.split('-')

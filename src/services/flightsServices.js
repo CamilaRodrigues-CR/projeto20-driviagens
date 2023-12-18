@@ -12,7 +12,7 @@ async function equalCities(origin, destination) {
     if (origin === destination) return true
 }
 
-async function futureDate(date) { // recebo a dta em tipo string
+async function futureDate(date) {
     const arrData = date.split('-')
     const reversed = arrData.reverse()
     const joindata = reversed.join('-')
@@ -29,8 +29,8 @@ async function insertFlights(origin, destination, date){
    const reverse = formatData.reverse()
    const toISOdata = reverse.join('-')
 
-   const isoDate = dayjs(toISOdata).toISOString()
-   console.log('data =>' ,isoDate)
+   const isoDate = dayjs(toISOdata).toISOString().slice(0, 10)
+   console.log('data formatada na service =>' ,isoDate)
 
     const result = await flightsRepositories.insertFlights(origin, destination, isoDate);
     return result

@@ -4,7 +4,7 @@ import { db } from "../database/databaseConnection.js";
 
 async function insertFlights(origin, destination, date) {
 
-    console.log("repository da flights",origin, destination, date)
+    console.log("dados do flight inseridos na repository => ",origin, destination, date)
     const resultInsert = db.query(`INSERT INTO flights (origin , destination, date) VALUES ($1, $2, $3);`, [origin, destination, date]);
     return resultInsert;
 }
