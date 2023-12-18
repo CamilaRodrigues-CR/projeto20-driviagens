@@ -30,7 +30,6 @@ async function insertFlights(origin, destination, date){
    const toISOdata = reverse.join('-')
 
    const isoDate = dayjs(toISOdata).toISOString().slice(0, 10)
-   console.log('data formatada na service =>' ,isoDate)
 
     const result = await flightsRepositories.insertFlights(origin, destination, isoDate);
     return result

@@ -1,10 +1,7 @@
 import { db } from "../database/databaseConnection.js";
 
 //post flights
-
 async function insertFlights(origin, destination, date) {
-
-    console.log("dados do flight inseridos na repository => ",origin, destination, date)
     const resultInsert = db.query(`INSERT INTO flights (origin , destination, date) VALUES ($1, $2, $3) RETURNING id;`, [origin, destination, date]);
     return resultInsert;
 }
@@ -13,7 +10,6 @@ async function findFlights(id) {
     const resultPassenger = db.query(`SELECT * FROM flights WHERE "id"=$1;`, [id])
     return resultPassenger;
 }
-
 
 //get flights
 async function getFlights(origin, destination) {
