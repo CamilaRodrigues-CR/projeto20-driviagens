@@ -36,8 +36,8 @@ async function insertFlights(origin, destination, date){
     return result
 }
 
-async function findFlights(origin, destination, date){
-    const result = await flightsRepositories.findFlights(origin, destination, date)
+async function findFlights(id){
+    const result = await flightsRepositories.findFlights(id)
     return result
 }
 

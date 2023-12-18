@@ -5,12 +5,12 @@ import { db } from "../database/databaseConnection.js";
 async function insertFlights(origin, destination, date) {
 
     console.log("dados do flight inseridos na repository => ",origin, destination, date)
-    const resultInsert = db.query(`INSERT INTO flights (origin , destination, date) VALUES ($1, $2, $3);`, [origin, destination, date]);
+    const resultInsert = db.query(`INSERT INTO flights (origin , destination, date) VALUES ($1, $2, $3) RETURNING id;`, [origin, destination, date]);
     return resultInsert;
 }
 
-async function findFlights(origin, destination, date) {
-    const resultPassenger = db.query(`SELECT * FROM flights WHERE "origin"=$1 AND "destination"=$2 AND "date"=$3;`, [origin, destination, date])
+async function findFlights(id) {
+    const resultPassenger = db.query(`SELECT * FROM flights WHERE "id"=$1;`, [id])
     return resultPassenger;
 }
 

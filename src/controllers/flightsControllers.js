@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 
 export async function postFlights(req, res) {
     const { origin, destination, date } = req.body;
+    console.log(date)
 
     //verificar se as cidades existem:
     const exist = await flightsServices.existCities(origin, destination);
@@ -22,9 +23,11 @@ export async function postFlights(req, res) {
     const datesEquals = await flightsServices.futureDate(date);
     if (datesEquals == true) throw errors.datesEqualsError("data inserida")
 
-    await flightsServices.insertFlights(origin, destination, date);
+   const insertedFlight = await flightsServices.insertFlights(origin, destination, date);
+   console.log(insertedFlight.rows[0])
 
-    const flight = await flightsServices.findFlights(origin, destination, date)
+    const flight = await flightsServices.findFlights(insertedFlight.rows[0].id)
+    console.log("variavel flight - " , flight.rows[0])
     
     //formatar a data
     const data = flight.rows[0].date.toISOString().slice(0, 10)
